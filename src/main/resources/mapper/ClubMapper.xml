@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jawaw.myclub.dao.mybatis.ClubMapper">
+
+    <select id="list" parameterType="Int" resultType="Club">
+--         select * from `club` where `club_status`=1
+        select * from `club`
+        <if test="id!=0">
+            where `club_id`=#{id, jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="searchClubByName" resultType="Club">
+        select * from `club` where `club_name` like CONCAT('%',#{name},'%')
+        <if test="club_id!=0">
+            and `club_id`=#{club_id, jdbcType=INTEGER}
+        </if>
+    </select>
+
+</mapper>
